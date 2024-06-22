@@ -12,6 +12,17 @@ Terraform provisioners are used to execute scripts or commands on a local or rem
       }
     }
     ```
+    ```
+       resource "aws_instance" "example" {
+       ami           = "ami-0c55b159cbfafe1f0"
+       instance_type = "t2.micro"
+    
+       provisioner "local-exec" {
+         command = "echo 'Instance ID: ${self.id}, Public IP: ${self.public_ip}' >> instance_details.log"
+       }
+      }
+
+   ```
 
 2. **Remote-exec**: Executes commands on a remote machine, such as a virtual machine instance created by Terraform. This requires connection details like SSH or WinRM.
     ```hcl
